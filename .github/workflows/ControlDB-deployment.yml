@@ -12,14 +12,6 @@ jobs:
           uses: Azure/login@v1
           with:
            creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-        - name: Install Azure CLI
-          run: |
-            Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi
-            Start-Process msiexec.exe -ArgumentList '/I AzureCLI.msi /quiet' -NoNewWindow -Wait
-        - name: Install SQLPackage
-          run: |
-            Invoke-WebRequest -Uri https://aka.ms/sqlpackage-msi -OutFile .\SQLPackage.msi
-            Start-Process msiexec.exe -ArgumentList '/I SQLPackage.msi /quiet' -NoNewWindow -Wait
         - name: Build and Deploy SQL Database
           uses: Azure/sql-action@v2
           with:
